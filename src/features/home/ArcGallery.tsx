@@ -22,7 +22,9 @@ export function ArcGallery() {
           <ul className="arc-items" aria-hidden="true">
             {ARC_PHOTOS.map((key) => (
               <li key={key} className="arc-item" data-arc-item>
-                <img src={photo(key, 360, 360)} width={360} height={360} alt="" loading="lazy" draggable={false} />
+                <div className="arc-card">
+                  <img src={photo(key, 360, 360)} width={360} height={360} alt="" loading="lazy" draggable={false} />
+                </div>
               </li>
             ))}
           </ul>

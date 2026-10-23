@@ -15,7 +15,7 @@ const EASE_IN_PER_SECOND = 2;
  * them turning clockwise on their own while the section is on screen.
  *
  *  - Hovering a photo (mouse) stops the wheel instantly; that photo is enlarged
- *    by CSS (`.arc-item:hover`). Moving off the photo lets the wheel pick up again.
+ *    smoothly without jitter or neighbor collisions. Moving off the photo lets the wheel pick up again.
  *  - On touch screens there is no hover, so tapping a photo pins it (stopped and
  *    enlarged via `.is-pinned`); tapping it again, or anywhere else, releases it.
  *
@@ -40,6 +40,8 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
     let last = 0;
     let onScreen = false;
     let hovered = false;
+    let activeItem: HTMLElement | null = null;
+    let leaveTimer: number | null = null;
     let pinned: HTMLElement | null = null;
 
     const layout = () => {
@@ -70,8 +72,9 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
         el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) rotate(${rotate.toFixed(1)}deg)`;
         el.style.opacity = Math.pow(fade, 0.6).toFixed(3);
         el.style.filter = fade < 0.98 ? `blur(${((1 - fade) * 3).toFixed(1)}px)` : '';
-        el.style.zIndex = String(1 + Math.round(fade * 5));
-        el.style.pointerEvents = fade < 0.5 ? 'none' : '';
+        const isActive = el === activeItem || el === pinned;
+        el.style.zIndex = isActive ? '100' : String(1 + Math.round(fade * 5));
+        el.style.pointerEvents = fade < 0.5 ? 'none' : 'auto';
       });
     };
 
@@ -100,11 +103,44 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
 
     const onEnter = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return;
+      if (leaveTimer) {
+        clearTimeout(leaveTimer);
+        leaveTimer = null;
+      }
+      const item = e.currentTarget as HTMLElement;
+      if (activeItem === item) return;
+
+      if (activeItem) {
+        activeItem.classList.remove('is-hovered');
+      }
+      activeItem = item;
+      item.classList.add('is-hovered');
       hovered = true;
       sync();
     };
+
     const onLeave = (e: PointerEvent) => {
       if (e.pointerType !== 'mouse') return;
+      const item = e.currentTarget as HTMLElement;
+      if (leaveTimer) clearTimeout(leaveTimer);
+
+      leaveTimer = window.setTimeout(() => {
+        if (activeItem === item) {
+          item.classList.remove('is-hovered');
+          activeItem = null;
+          hovered = false;
+          sync();
+        }
+      }, 70);
+    };
+
+    const onStageLeave = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') return;
+      if (leaveTimer) clearTimeout(leaveTimer);
+      if (activeItem) {
+        activeItem.classList.remove('is-hovered');
+        activeItem = null;
+      }
       hovered = false;
       sync();
     };
@@ -135,6 +171,7 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
       el.addEventListener('pointerleave', onLeave);
       el.addEventListener('click', onItemClick);
     });
+    stage.addEventListener('pointerleave', onStageLeave);
     if (coarse) document.addEventListener('pointerdown', onDocPointerDown);
 
     const io = new IntersectionObserver(
@@ -157,9 +194,11 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
 
     return () => {
       cancelAnimationFrame(raf);
+      if (leaveTimer) clearTimeout(leaveTimer);
       io.disconnect();
       ro.disconnect();
       document.removeEventListener('pointerdown', onDocPointerDown);
+      stage.removeEventListener('pointerleave', onStageLeave);
       items.forEach((el) => {
         el.removeEventListener('pointerenter', onEnter);
         el.removeEventListener('pointerleave', onLeave);
