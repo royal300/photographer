@@ -1,0 +1,15 @@
+.enquiry{position:relative;background:#fff;color:#0a0a0b;border-radius:20px;padding:clamp(20px,3vw,32px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.enquiry .full{grid-column:1/-1}
+.field{display:grid;gap:7px;min-width:0;align-content:start}
+.field label{font:600 11.5px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#55555b}
+.field input,.field select{width:100%;min-height:50px;padding:12px 14px;border-radius:12px;border:1.5px solid #dcdad5;background:#faf9f7;color:#0a0a0b;font:400 16px/1.2 var(--font-body);transition:border-color .25s,box-shadow .25s,background .25s;appearance:none;-webkit-appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none' stroke='%23d91626' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.field input:focus,.field select:focus{outline:none;border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(217,22,38,.14)}
+.field input[aria-invalid="true"],.field select[aria-invalid="true"]{border-color:var(--red)}
+.field .err{font-size:12.5px;color:var(--red-lo);display:none}
+.field.bad .err{display:block}
+.enquiry .btn{width:100%;min-height:54px;background:var(--black);color:#fff;font-size:15.5px}
+.enquiry .btn:hover{background:var(--red)}
+.enquiry .btn svg{width:18px;height:18px}
+.form-note{font-size:12.5px;color:#6a6a70;text-align:center}
+@media (max-width:520px){.enquiry{grid-template-columns:minmax(0,1fr)}}

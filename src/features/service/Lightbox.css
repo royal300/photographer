@@ -1,0 +1,14 @@
+/* lightbox */
+.lb{border:0;padding:0;background:transparent;max-width:100vw;max-height:100dvh;width:100vw;height:100dvh;color:#fff}
+.lb::backdrop{background:rgba(5,5,6,.92);backdrop-filter:blur(8px)}
+.lb[open]{display:grid;place-items:center}
+.lb img{max-width:min(92vw,1100px);max-height:80dvh;border-radius:14px;box-shadow:0 40px 90px -30px #000;animation:lbin .5s var(--ease)}
+@keyframes lbin{from{opacity:0;transform:scale(.94) translateY(24px)}}
+.lb-x,.lb-n,.lb-p{position:absolute;width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(10,10,11,.6);display:grid;place-items:center;padding:0;transition:background .3s,border-color .3s}
+.lb-x:hover,.lb-n:hover,.lb-p:hover{background:var(--red);border-color:var(--red)}
+.lb-x{top:18px;right:18px}
+.lb-p{left:18px;top:50%;margin-top:-24px}
+.lb-n{right:18px;top:50%;margin-top:-24px}
+.lb svg{width:20px;height:20px}
+.lb-c{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:13px;letter-spacing:.14em;color:var(--muted)}
+@media (max-width:520px){.lb-p{left:8px}.lb-n{right:8px}}

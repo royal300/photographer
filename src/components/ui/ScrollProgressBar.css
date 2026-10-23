@@ -1,0 +1,32 @@
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #b91321 0%, #ff4655 70%, #ffd166 100%);
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+.scroll-progress-spark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px 2px #fff, 0 0 16px 4px #ff4655;
+  will-change: transform;
+}

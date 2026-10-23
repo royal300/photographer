@@ -1,0 +1,27 @@
+.dots{display:flex;align-items:center;gap:8px}
+.dot{position:relative;width:34px;height:20px;padding:0;border:0;background:none;display:grid;place-items:center}
+.dot::before{content:"";width:100%;height:4px;border-radius:4px;background:rgba(255,255,255,.28);transition:background .3s}
+.dot:hover::before{background:rgba(255,255,255,.5)}
+.dot .bar{position:absolute;left:0;top:8px;width:100%;height:4px;border-radius:4px;background:var(--red-hi);transform:scaleX(0);transform-origin:left}
+.dot.is-done .bar{transform:scaleX(1)}
+.dot.is-active .bar{animation:fill var(--interval) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.is-paused .dot.is-active .bar{animation-play-state:paused}
+.count{font:600 13px/1 var(--font-body);letter-spacing:.14em;color:var(--muted);font-variant-numeric:tabular-nums}
+.count b{color:#fff;font-weight:600}
+.arrows{display:flex;gap:10px}
+.arrow{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:rgba(10,10,11,.45);backdrop-filter:blur(8px);display:grid;place-items:center;padding:0;transition:background .3s,border-color .3s,transform .35s var(--ease),color .3s}
+.arrow svg{width:18px;height:18px}
+.arrow:hover{background:var(--red);border-color:var(--red);transform:scale(1.08)}
+.arrow--light{border-color:rgba(255,255,255,.3)}
+.light .arrow{border-color:rgba(0,0,0,.25);background:transparent;color:#000}
+.light .arrow:hover{background:var(--red);border-color:var(--red);color:#fff}
+/* ---------- Slideshow pause button ---------- */
+.pp{width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);background:rgba(10,10,11,.45);backdrop-filter:blur(8px);display:grid;place-items:center;padding:0;transition:background .3s,border-color .3s}
+.pp:hover{background:var(--red);border-color:var(--red)}
+.pp svg{width:16px;height:16px}
+.pp .i-play{display:none}
+.is-stopped .pp .i-play{display:block}
+.is-stopped .pp .i-pause{display:none}
+.is-stopped .dot.is-active .bar{animation-play-state:paused}
+@media (max-width:760px){.arrow,.pp{width:40px;height:40px}.arrow svg{width:16px;height:16px}.dot{width:22px}.dots{gap:6px}.arrows{gap:8px}}

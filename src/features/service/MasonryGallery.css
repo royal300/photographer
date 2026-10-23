@@ -1,0 +1,12 @@
+/* masonry gallery */
+.masonry{columns:3;column-gap:16px}
+.mi{break-inside:avoid;margin:0 0 16px;position:relative;border-radius:16px;overflow:hidden;background:#1a1a1d;cursor:zoom-in;display:block;width:100%;padding:0;border:0}
+.mi img{width:100%;height:auto;transition:transform 1.1s var(--ease),filter .5s}
+.mi::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(217,22,38,.45),transparent 50%);opacity:0;transition:opacity .5s}
+.mi:hover img,.mi:focus-visible img{transform:scale(1.07)}
+.mi:hover::after,.mi:focus-visible::after{opacity:1}
+.mi span{position:absolute;z-index:2;left:14px;bottom:12px;font:600 11.5px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:#fff;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease)}
+.mi:hover span,.mi:focus-visible span{opacity:1;transform:none}
+@media (hover:none){.mi span{opacity:1;transform:none;text-shadow:0 1px 6px rgba(0,0,0,.7)}.mi::after{opacity:.6}}
+@media (max-width:1000px){.masonry{columns:2}}
+@media (max-width:520px){.masonry{column-gap:10px}.mi{margin-bottom:10px;border-radius:12px}}

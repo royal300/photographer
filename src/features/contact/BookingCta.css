@@ -1,0 +1,12 @@
+.book{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:clamp(28px,4vw,56px);padding:clamp(26px,4vw,52px);border-radius:26px;background:linear-gradient(120deg,#e8202f,var(--red) 40%,#7e0a14);overflow:hidden}
+.book::before{content:"";position:absolute;right:-60px;top:-80px;width:300px;height:300px;border-radius:50%;border:48px solid rgba(255,255,255,.08)}
+.book h2{font:600 clamp(34px,4.2vw,54px)/1.02 var(--font-head);letter-spacing:-.01em;max-width:16em;position:relative;text-wrap:balance}
+.book p{margin-top:10px;opacity:.9;position:relative}
+/* ---------- Footer enquiry form ---------- */
+.book-info{position:relative}
+.book-info p{margin-top:12px;opacity:.92;max-width:38ch}
+.book-meta{margin-top:26px;display:grid;gap:12px;font-size:15px}
+.book-meta li{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+.book-meta svg{flex:none;width:18px;height:18px;margin-top:3px}
+.book-meta a:hover{text-decoration:underline}
+@media (max-width:960px){.book{grid-template-columns:minmax(0,1fr)}}

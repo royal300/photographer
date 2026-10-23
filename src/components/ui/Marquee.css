@@ -1,0 +1,10 @@
+/* ---------- Marquee ---------- */
+.marquee{position:relative;overflow:hidden;border-block:1px solid var(--line);background:var(--black);padding:clamp(14px,2vw,22px) 0}
+.marquee-track{display:flex;align-items:center;gap:clamp(24px,3vw,44px);width:max-content;animation:mq 38s linear infinite;font:italic 500 clamp(28px,4vw,48px)/1 var(--font-head);color:rgba(255,255,255,.92);white-space:nowrap}
+.marquee-item{display:inline-flex;align-items:center;gap:clamp(24px,3vw,44px)}
+.marquee-item i{font-style:normal;font-size:.5em;color:var(--red-hi)}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){
+  .marquee-track{animation:none}
+}

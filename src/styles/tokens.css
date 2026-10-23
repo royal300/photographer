@@ -1,0 +1,9 @@
+/* Design tokens */
+:root{
+  --black:#0a0a0b; --ink:#121214; --ink-2:#1b1b1e; --line:rgba(255,255,255,.12);
+  --white:#fff; --paper:#f5f4f1; --paper-2:#eae8e3;
+  --red:#d91626; --red-hi:#ff4655; --red-lo:#a50d1a;
+  --muted:rgba(255,255,255,.72); --muted-dark:#55555b;
+  --font-head:"Cormorant Garamond",Georgia,serif; --font-body:"Inter",system-ui,sans-serif; --font-serif:"Cormorant Garamond",Georgia,serif;
+  --wrap:1160px; --nav-h:72px; --ease:cubic-bezier(.22,.8,.24,1);
+}

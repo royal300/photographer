@@ -1,0 +1,57 @@
+/* ---------- Hero ---------- */
+.hero{padding:8px 0 clamp(48px,7vw,88px);position:relative;overflow-x:clip}
+.hero::before{content:"";position:absolute;left:50%;top:-10%;width:min(900px,120vw);height:520px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(217,22,38,.38),transparent);pointer-events:none}
+.hero-wrap{width:min(100% - 32px,1080px);margin-inline:auto;position:relative}
+.carousel{position:relative;border-radius:26px;overflow:hidden;background:var(--ink);border:1px solid var(--line);box-shadow:0 40px 90px -30px rgba(217,22,38,.45),0 30px 60px -30px #000;touch-action:pan-y;--interval:3s}
+.slides{display:grid}
+.slide{grid-area:1/1;position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:clamp(460px,52vh,540px);opacity:0;visibility:hidden;transition:opacity .9s var(--ease),visibility 0s .9s}
+.slide.is-active{opacity:1;visibility:visible;z-index:2;transition-delay:0s}
+.bg{position:absolute;inset:0;overflow:hidden;background:#222}
+.bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;translate:calc(var(--mx,0) * -10px) calc(var(--my,0) * -8px);transition:translate .4s ease-out}
+.slide.is-active .bg img{animation:kb 4s ease-out forwards}
+@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1)}}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,11,.96) 0%,rgba(10,10,11,.82) 34%,rgba(10,10,11,.2) 70%,rgba(10,10,11,.05) 100%),linear-gradient(0deg,rgba(10,10,11,.7),transparent 35%)}
+.slide-body{position:relative;z-index:2;align-self:center;padding:44px 0 96px 56px;max-width:520px}
+.slide-body .eyebrow{font-size:11.5px}
+.slide h1{font:600 clamp(38px,4.8vw,60px)/1 var(--font-head);letter-spacing:-.01em;margin-top:16px;text-wrap:balance}
+.slide h1 em{color:var(--red-hi)}
+.slide p{margin-top:16px;color:var(--muted);font-size:16px;max-width:42ch}
+.rise{opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.slide.is-active .rise{opacity:1;transform:none;transition-delay:calc(.25s + var(--d,0) * 110ms)}
+.chip{position:absolute;z-index:3;top:26px;right:28px;display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 12px;border-radius:999px;background:rgba(10,10,11,.6);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);font:600 13px/1 var(--font-body);animation:float 5s ease-in-out infinite}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--red-hi);box-shadow:0 0 0 0 rgba(255,70,85,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(255,70,85,0)}100%{box-shadow:0 0 0 0 rgba(255,70,85,0)}}
+@keyframes float{50%{transform:translateY(-7px)}}
+.polaroid{position:absolute;z-index:3;right:7%;bottom:15%;width:clamp(120px,15vw,172px);padding:7px 7px 24px;background:#fff;border-radius:3px;box-shadow:0 24px 40px -12px rgba(0,0,0,.65);rotate:6deg;translate:calc(var(--mx,0) * 16px) calc(var(--my,0) * 12px);transition:translate .4s ease-out,rotate .5s var(--ease)}
+.polaroid img{aspect-ratio:4/5;width:100%;object-fit:cover}
+.polaroid::after{content:"";position:absolute;top:-10px;left:50%;width:54px;height:18px;margin-left:-27px;background:rgba(217,22,38,.85);rotate:-4deg;border-radius:2px}
+.carousel:hover .polaroid{rotate:2deg}
+.slide:not(.is-active) .polaroid,.slide:not(.is-active) .chip{opacity:0}
+.slide.is-active .polaroid{animation:pop .9s .45s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.9)}}
+.ui{position:absolute;z-index:6;left:56px;right:36px;bottom:26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.ui-progress{display:flex;align-items:center;gap:12px}
+@media (max-width:760px){
+  .hero-wrap{width:min(100% - 24px,1080px)}
+  .carousel{border-radius:22px}
+  .slide{display:flex;flex-direction:column;min-height:0}
+  .bg{position:relative;inset:auto;height:clamp(210px,58vw,300px);flex:none}
+  .bg::after{background:linear-gradient(0deg,var(--ink) 0%,rgba(18,18,20,.2) 55%,transparent)}
+  .slide-body{padding:10px 22px 92px;max-width:none}
+  .slide h1{font-size:40px}
+  .slide p{font-size:15px}
+  .cta-row .btn{flex:1 1 auto}
+  .chip{top:14px;right:auto;left:14px;font-size:12px;padding:8px 13px 8px 10px}
+  .polaroid{display:none}
+  .ui{left:22px;right:18px;bottom:22px}
+  .count{display:none}
+}
+/* ---------- Trust strip ---------- */
+.strip{margin-top:28px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 34px;color:var(--muted);font-size:13.5px}
+.strip span{display:inline-flex;align-items:center;gap:9px}
+.strip svg{width:16px;height:16px;color:var(--red-hi)}
+@media (prefers-reduced-motion:reduce){
+  .slide.is-active .bg img{animation:none}
+  .chip,.chip i{animation:none}
+  .bg img,.polaroid{translate:none}
+}

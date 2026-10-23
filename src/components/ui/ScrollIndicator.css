@@ -1,0 +1,136 @@
+.scroll-indicator-wrap {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.9);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), visibility 0.4s;
+}
+
+.scroll-indicator-wrap.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-indicator-btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(18, 18, 20, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.scroll-indicator-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  border-color: rgba(255, 70, 85, 0.6);
+  background: rgba(27, 27, 30, 0.95);
+  box-shadow: 0 14px 30px -4px rgba(217, 22, 38, 0.4), 0 0 16px rgba(255, 70, 85, 0.3);
+}
+
+.scroll-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.scroll-ring-bg {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.scroll-ring-fill {
+  stroke: url(#scroll-gradient);
+  stroke-dasharray: 138;
+  stroke-dashoffset: calc(138 - (138 * var(--ring-progress, 0)));
+  transition: stroke-dashoffset 0.15s ease-out;
+  stroke-linecap: round;
+}
+
+.scroll-btn-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-btn-icon {
+  display: none;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s var(--ease);
+}
+
+.scroll-indicator-btn:hover .scroll-btn-icon {
+  display: block;
+}
+
+.scroll-indicator-btn:hover .scroll-pct {
+  display: none;
+}
+
+.scroll-indicator-btn:hover .scroll-btn-icon {
+  transform: translateY(-3px);
+  color: var(--red-hi);
+}
+
+.scroll-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(18, 18, 20, 0.92);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font: 500 12px/1 var(--font-body);
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-indicator-btn:hover .scroll-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 760px) {
+  .scroll-indicator-wrap {
+    right: 16px;
+    bottom: 74px; /* Sits cleanly above mobile FAB */
+  }
+  .scroll-indicator-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .scroll-tooltip {
+    display: none;
+  }
+}

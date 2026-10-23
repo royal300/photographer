@@ -1,0 +1,15 @@
+/* ---------- Buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:12px 24px;border-radius:999px;border:1.5px solid transparent;font:600 14.5px/1 var(--font-body);letter-spacing:.01em;overflow:hidden;isolation:isolate;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s,color .3s,border-color .3s;white-space:nowrap}
+.btn svg{width:16px;height:16px;flex:none;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--red{background:linear-gradient(135deg,#f0303f,var(--red) 55%,var(--red-lo));color:#fff;box-shadow:0 8px 24px -8px rgba(217,22,38,.75),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn--red::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease)}
+.btn--red:hover{transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(217,22,38,.9),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn--red:hover::before{transform:translateX(120%)}
+.btn--ghost{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.04);backdrop-filter:blur(6px)}
+.btn--ghost:hover{background:#fff;color:#000;border-color:#fff}
+.btn--dark{background:var(--black);color:#fff}
+.btn--dark:hover{background:var(--red);transform:translateY(-2px)}
+.btn--outline-dark{border-color:rgba(0,0,0,.25);color:#000}
+.btn--outline-dark:hover{background:#000;color:#fff;border-color:#000}
+.btn--sm{min-height:40px;padding:10px 20px;font-size:14px}
