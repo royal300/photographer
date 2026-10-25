@@ -48,11 +48,11 @@ export function useArcWheel(stageRef: RefObject<HTMLElement>): void {
       width = stage.clientWidth;
       const mobile = width < 640;
       count = mobile ? Math.min(7, items.length) : items.length;
-      const size = Math.round(Math.min(150, Math.max(62, width * (mobile ? 0.2 : 0.125))));
+      const size = Math.round(Math.min(180, Math.max(75, width * (mobile ? 0.23 : 0.15))));
       rx = width / 2 - size / 2 - 4;
-      ry = mobile ? rx * 1.25 : Math.min(rx * 0.66, 340);
+      ry = mobile ? rx * 1.25 : Math.min(rx * 0.66, 350);
       cy = ry + size * 0.62;
-      stage.style.height = `${cy + size * 0.62}px`;
+      stage.style.height = `${cy + size * 0.65}px`;
       stage.style.setProperty('--s', `${size}px`);
     };
 
